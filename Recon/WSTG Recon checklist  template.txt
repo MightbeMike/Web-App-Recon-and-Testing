@@ -1,0 +1,127 @@
+---------------------------------------------------------------------
+
+## Target Information
+- Target URL-
+- Rules of Engagement
+- Date - 
+- Tester 
+
+
+---------------------------------------------------------------------
+
+## WSTG-INFO / Offsec Information Gathering
+
+Passive Information Gathering (Reconnaissance) 
+
+### WSTG-INFO-01 Search Engine Discovery 
+Reconnaissance for Information Leakage
+
+- [ ] nslookup / dig for DNS resolution and IP discovery
+- [ ] Whois lookup for domain ownership and registration info
+- [ ] Check robots.txt for disallowed paths
+- [ ] Perform Google Dorking for sensitive info leakage
+- [ ] Use Netcraft for hosting and technology info
+- [ ] Search Shodan for exposed services and devices
+- [ ] SSL Server Test from Qualys SSL Labs
+- [ ] DNS enumeration (zone transfers, subdomain enumeration)
+
+
+Notes:
+---------------------------------------------------------------------
+
+Active Information Gathering 
+(Network and Service Enumeration)
+
+### Network Reconnaissance and Port Scanning 
+
+- [ ] Perform TCP port scan using nmap to identify open ports and services
+- [ ] Perform UDP port scan (e.g., for SNMP on port 161)
+- [ ] Save and analyze scan results for further enumeration
+
+
+Notes:
+
+---------------------------------------------------------------------
+
+
+### SNMP Enumeration (if SNMP service detected)
+
+- [ ] Attempt SNMP community string brute force (e.g., using onesixtyone)
+- [ ] Use snmpwalk with valid community strings to enumerate:
+System information
+Running processes
+User accounts
+Installed software
+Open TCP ports
+- [ ] Correlate SNMP findings with other reconnaissance data
+
+
+Notes:
+
+
+---------------------------------------------------------------------
+
+Web Application Specific Enumeration
+### WSTG-INFO-02 Fingerprint Web Server
+
+- [ ] Identify server header/banner
+- [ ] Detect underlying technologies (e.g., Apache, IIS, PHP versions)
+
+
+Notes:
+---------------------------------------------------------------------
+
+
+### WSTG-INFO-03 Review Webserver Metafiles for Information Leakage
+- [ ] Check sitemap.xml
+- [ ] Check /security.txt or /.well-known/security.txt
+- [ ] Check human.txt
+
+
+Notes:
+
+---------------------------------------------------------------------
+
+
+### WSTG-INFO-04 Enumerate Applications on Webserver
+
+- [ ] Identify virtual hosts and multiple web applications on same IP
+- [ ] Enumerate symbolic names (DNS names) resolving to target IP
+- [ ] Discover hidden fields, tokens, comments in HTML
+- [ ] Identify application versions and frameworks
+
+
+Notes:
+
+---------------------------------------------------------------------
+
+
+### WSTG-INFO-05 Review Webpage Content for Information Leakage
+
+- [ ] Analyze parameters, forms, JSON, headers for sensitive info
+
+
+Notes:
+
+---------------------------------------------------------------------
+
+
+### WSTG-INFO-06 Identify Application Entry Points
+
+- [ ] Map navigation flow and user entry points
+
+
+Notes:
+
+----------------------------------------------------------------------
+
+### WSTG-INFO-07 Map Execution Paths Through Application
+
+- [ ] Identify framework versions and execution paths
+
+
+Notes:
+
+----------------------------------------------------------------------
+
+
