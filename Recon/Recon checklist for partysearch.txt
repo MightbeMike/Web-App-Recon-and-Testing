@@ -1,0 +1,129 @@
+---------------------------------------------------------------------
+
+## Target Information
+- Target URL- Target URL:--REDACTED--
+- Scope - Authorized Black Box Assesment
+- Date - 6/26/15
+- Tester - Michael Graziano 
+---------------------------------------------------------------------
+
+" is document outlines a structured reconnaissance process performed against a public-facing web application using OWASP WSTG guidance. 
+All sensitive identifiers have been removed for public release. "
+
+
+
+## WSTG-INFO Information Gathering
+
+### WSTG-INFO-01 Fingerprint Web Server
+- [X] Server header / banner
+- [X] Technologies detected
+- Notes
+The application content is generated dynamically and relies heavily on server-side rendering.
+Client-side JavaScript is minimal and primarily used to support classic postback-driven workflows. 
+
+The front-end shell appears to request data through framework-managed callbacks rather than modern REST-style API
+---------------------------------------------------------------------
+
+
+### WSTG-INFO-02 Review Webserver Metafiles (robots.txt, sitemap.xml) finger print web server 
+- [X] robots.txt checked
+- [X] sitemap.xml checked
+- Notes
+Observed characteristics include:
+Web server: Microsoft IIS 10.0
+Platform: ASP.NET WebForms
+.NET Runtime: 4.0.30319
+ASP.NET version: 4.8.x
+JavaScript delivery via WebResource.axd
+
+Evidence of verbose error handling due to disabled custom error configuration
+No indexed pages observed via metadata.
+
+These findings are consistent with a legacy ASP.NET WebForms deployment
+---------------------------------------------------------------------
+
+
+
+### WSTG-INFO-03 Review Webserver Metafiles for Information Leakage
+- [X] Directories enumerated
+- [X] Virtual hosts discovered
+- Notes
+No direct file disclosure was observed during initial enumeration.
+Findings were logged for follow-up testing during configuration and access control phases.
+---------------------------------------------------------------------
+
+
+### WSTG-INFO-04 Review Webpage Content
+- [X] Comments in HTML
+- [X] Hidden fields / tokens
+- Notes
+The presence of Sys.WebForms.PageRequestManager._initialize confirms usage of ASP.NET AJAX
+extensions.
+
+Several endpoints were observed utilizing multiple client-supplied parameters including identifiers,
+query values, and event parameters. 
+
+These inputs were flagged for future validation, authorization, and
+business logic testing.
+---------------------------------------------------------------------
+
+
+### WSTG-INFO-05 Review Webpage Content for Information Leakage
+- [X] Parameters, forms, JSON, headers
+- Notes
+Verbose error handling was observed, consistent with customErrors="off" , which may expose stack
+traces or internal application logic during fault conditions.
+
+Session cookies were observed without the Secure attribute, representing a potential transport-layer
+risk depending on deployment context.
+
+Additional application content referenced internal subdomains, indicating a segmented application
+ecosystem.
+---------------------------------------------------------------------
+
+
+### WSTG-INFO-06 Identify Application Entry Points
+- [X] Navigation flow mapped
+- Notes
+The application relies heavily on the ASP.NET WebForms model. 
+
+Navigation and state transitions are
+driven by server-managed postbacks using hidden fields such as __VIEWSTATE , __EVENTVALIDATION ,
+and __doPostBack
+---------------------------------------------------------------------
+
+
+### WSTG-INFO-07 Map Execution Paths Through Application
+- [X] Framework version
+- Notes
+Execution flow is tightly coupled to WebForms postback mechanics.
+Application state is preserved and transmitted via hidden fields rather than client-side routing or APIs. 
+
+This architecture increases the importance of input validation, state integrity, and server-side trust boundaries.
+---------------------------------------------------------------------
+
+
+### WSTG-INFO-08/09 Fingerprint Web Application / Map Application Architecture
+- [X] App-specific patterns (cookies, tokens)
+- [X] Frontend vs Backend
+- [X] DB calls inferred
+- Notes
+Observed architectural traits include:
+Standard ASP.NET session handling via ASP.NET_SessionId
+X-AspNet-Version header present
+.NET Framework 4.x running on IIS 10
+Extensive use of __VIEWSTATE and __EVENTVALIDATION
+Classic WebForms routing and UI logic
+All pages are form-driven with server-side state management
+
+Notably absent:
+ASP.NET Core
+Razor views (.cshtml)
+Client-side frameworks such as Angular, React, or Vue
+Modern static asset bundling or build tooling
+Overall, the application reflects a traditional ASP.NET WebForms architecture with legacy state
+management patterns.
+
+
+
+
