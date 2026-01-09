@@ -1,4 +1,4 @@
-# Web-App-Recon-and-Testing
+# <div align="center"> Web-App-Recon-and-Testing </div>
 
 <div align="center"> This repository contains sanitized examples of real-world web application testing, including
 reconnaissance artifacts, redacted vulnerability write-ups, and controlled proof-of-concept
